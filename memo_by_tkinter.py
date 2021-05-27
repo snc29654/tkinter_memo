@@ -17,7 +17,7 @@ def getTextInput():
 
 
 
-textExample=tkinter.Text(root, height=30)
+textExample=tkinter.Text(root, height=40,width=110)
 textExample.pack()
 textExample.place(x=90, y=40)
 
@@ -184,8 +184,8 @@ btn.place(x=300, y=10)
 btn2 = tkinter.Button(root, text='追加', command=btn_click2)
 btn2.place(x=10, y=110)
 
-btn3 = tkinter.Button(root, text='入力フィールドクリア', command=btn_click3)
-btn3.place(x=500, y=450)
+btn3 = tkinter.Button(root, text='入力クリア', command=btn_click3)
+btn3.place(x=10, y=570)
 
 btn4 = tkinter.Button(root, text='キー指定削除', command=btn_click4)
 btn4.place(x=10, y=150)
@@ -200,7 +200,7 @@ btn7 = tkinter.Button(root, text='フォント小', command=btn_click7)
 btn7.place(x=10, y=240)
 
 # 画面サイズ
-root.geometry('700x500')
+root.geometry('900x600')
 # 画面タイトル
 root.title('メモデータベース')
 
