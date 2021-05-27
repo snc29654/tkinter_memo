@@ -1,7 +1,8 @@
 ############################################
 import datetime
 import tkinter
-
+import sys
+from tkinter import messagebox
 import sqlite3
 from contextlib import closing
 dbname = 'memo.db'
@@ -145,35 +146,38 @@ def btn_click4():
 
 
 def btn_click5():
+    ret = messagebox.askyesno('確認', '全削除やめますか？')
+    if ret == True:
+        pass
+    else:    
+        get_data =txt.get()
 
-    get_data =txt.get()
-
-    match_word = get_data
-
-
-    with closing(sqlite3.connect(dbname)) as conn:
-        c = conn.cursor()
-        select_sql = 'delete from items'
-
-        data=[]
-        print (select_sql )
-        try:
-
-            for row in c.execute(select_sql):
-                print(row)
-                data.append(row)
-
-            conn.commit()
-
-        except:
-
-            print("data not found")
+        match_word = get_data
 
 
+        with closing(sqlite3.connect(dbname)) as conn:
+            c = conn.cursor()
+            select_sql = 'delete from items'
 
-    textExample.delete("1.0",tkinter.END)
+            data=[]
+            print (select_sql )
+            try:
 
-    textExample.insert(tkinter.END,"削除しました")
+                for row in c.execute(select_sql):
+                    print(row)
+                    data.append(row)
+
+                conn.commit()
+
+            except:
+
+                print("data not found")
+
+
+
+        textExample.delete("1.0",tkinter.END)
+
+        textExample.insert(tkinter.END,"削除しました")
 
        
 
