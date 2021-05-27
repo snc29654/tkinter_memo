@@ -45,11 +45,11 @@ def btn_click():
                 print(row)
                 print(type(row))
                 text = "-".join(map(str, row))
-                #text.replace("\}","\:")
                 print(text)
                 print(type(text))
                 data.append(text)
                 text2="".join(map(str, data))
+                data.append("----------------------------------------------------------------\n")
             conn.commit()
 
         except:
@@ -128,6 +128,34 @@ def btn_click4():
             print("data not found")
 
 
+
+def btn_click5():
+
+    get_data =txt.get()
+
+    match_word = get_data
+
+
+    with closing(sqlite3.connect(dbname)) as conn:
+        c = conn.cursor()
+        select_sql = 'delete from items'
+
+        data=[]
+        print (select_sql )
+        try:
+
+            for row in c.execute(select_sql):
+                print(row)
+                data.append(row)
+
+            conn.commit()
+
+        except:
+
+            print("data not found")
+
+
+
     textExample.delete("1.0",tkinter.END)
 
     textExample.insert(tkinter.END,"削除しました")
@@ -144,8 +172,11 @@ btn2.place(x=10, y=110)
 btn3 = tkinter.Button(root, text='入力フィールドクリア', command=btn_click3)
 btn3.place(x=500, y=450)
 
-btn4 = tkinter.Button(root, text='削除', command=btn_click4)
+btn4 = tkinter.Button(root, text='キー指定削除', command=btn_click4)
 btn4.place(x=10, y=150)
+
+btn5 = tkinter.Button(root, text='全削除', command=btn_click5)
+btn5.place(x=10, y=180)
 
 
 # 画面サイズ
