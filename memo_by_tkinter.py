@@ -6,6 +6,8 @@ import sqlite3
 from contextlib import closing
 dbname = 'memo.db'
 
+fontsize =10
+
 root = tkinter.Tk()
 
 
@@ -19,12 +21,25 @@ textExample=tkinter.Text(root, height=30)
 textExample.pack()
 textExample.place(x=90, y=40)
 
+
 btnRead=tkinter.Button(root, height=1, width=10, text="Clear", 
                     command=getTextInput)
 
 
+def btn_click6():
+    global fontsize
+    fontsize = fontsize + 1
+    textExample.configure(font=("Courier", fontsize))
+    
+def btn_click7():
+    global fontsize
+    fontsize = fontsize - 1
+    textExample.configure(font=("Courier", fontsize))
+
+
 #検索
 def btn_click():
+    textExample.configure(font=("Courier", 10))
 
     data_exist =0
 
@@ -178,6 +193,11 @@ btn4.place(x=10, y=150)
 btn5 = tkinter.Button(root, text='全削除', command=btn_click5)
 btn5.place(x=10, y=180)
 
+btn6 = tkinter.Button(root, text='フォント大', command=btn_click6)
+btn6.place(x=10, y=210)
+
+btn7 = tkinter.Button(root, text='フォント小', command=btn_click7)
+btn7.place(x=10, y=240)
 
 # 画面サイズ
 root.geometry('700x500')
