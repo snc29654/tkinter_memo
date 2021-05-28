@@ -6,7 +6,7 @@ import sys
 from tkinter import messagebox
 import sqlite3
 from contextlib import closing
-dbname = 'memo.db'
+dbname = '../memo.db'
 
 fontsize =10
 
