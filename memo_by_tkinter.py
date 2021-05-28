@@ -205,7 +205,7 @@ btn7 = tkinter.Button(root, text='フォント小', command=btn_click7)
 btn7.place(x=10, y=240)
 
 # 画面サイズ
-root.geometry('1000x600')
+root.geometry('1000x750')
 # 画面タイトル
 root.title('メモデータベース')
 
