@@ -185,6 +185,22 @@ def btn_click4():
 
             print("data not found")
 
+#指定キー更新
+def btn_click9():
+    get_data =txt.get()
+    match_word = get_data
+    get_mean =textExample.get('1.0', 'end')
+
+
+    #if btn_click() == 0:
+
+    with closing(sqlite3.connect(dbname)) as conn:
+        c = conn.cursor()
+
+        insert_sql = 'update items set mean ='+'"'+str(get_mean)+'"'+ 'where item_id = '+'"'+str(match_word)+'"'
+        print(insert_sql)
+        c.execute(insert_sql)
+        conn.commit()
 
 
 def btn_click5():
@@ -248,6 +264,8 @@ btn7.place(x=10, y=240)
 btn8 = tkinter.Button(root, text='キー指定表示', command=btn_click8)
 btn8.place(x=10, y=270)
 
+btn9 = tkinter.Button(root, text='キー指定更新', command=btn_click9)
+btn9.place(x=10, y=300)
 
 # 画面サイズ
 root.geometry('1000x750')
