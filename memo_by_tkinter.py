@@ -79,6 +79,47 @@ def btn_click():
     textExample.insert(tkinter.END,text2)
 
     return data_exist
+#指定キー表示
+def btn_click8():
+    textExample.configure(font=("Courier", 10))
+
+    data_exist =0
+
+    get_data =txt.get()
+
+    match_word = get_data
+
+    with closing(sqlite3.connect(dbname)) as conn:
+        c = conn.cursor()
+        select_sql = 'select * from items where item_id like '+'"%'+str(match_word)+'%"'
+
+        data=[]
+        print (select_sql )
+        try:
+
+            for row in c.execute(select_sql):
+                data_exist = 1;
+                print(row)
+                print(type(row))
+                text = "-".join(map(str, row))
+                print(text)
+                print(type(text))
+                data.append(text)
+                text2="".join(map(str, data))
+                data.append("----------------------------------------------------------------\n")
+            conn.commit()
+
+        except:
+
+            print("data exception")
+
+    
+    textExample.delete("1.0",tkinter.END)
+
+    textExample.insert(tkinter.END,text2)
+
+    return data_exist
+
 
 #追加
 def btn_click2():
@@ -118,7 +159,7 @@ def btn_click3():
 
     textExample.delete("1.0",tkinter.END)
 
-#削除
+#キー指定削除
 def btn_click4():
 
     get_data =txt.get()
@@ -183,7 +224,7 @@ def btn_click5():
        
 
 # ボタン
-btn = tkinter.Button(root, text='検索', command=btn_click)
+btn = tkinter.Button(root, text='キーワード検索', command=btn_click)
 btn.place(x=300, y=10)
 
 btn2 = tkinter.Button(root, text='追加', command=btn_click2)
@@ -203,6 +244,10 @@ btn6.place(x=10, y=210)
 
 btn7 = tkinter.Button(root, text='フォント小', command=btn_click7)
 btn7.place(x=10, y=240)
+
+btn8 = tkinter.Button(root, text='キー指定表示', command=btn_click8)
+btn8.place(x=10, y=270)
+
 
 # 画面サイズ
 root.geometry('1000x750')
@@ -224,8 +269,8 @@ txt.place(x=90, y=10)
 txt.insert(tkinter.END,"")
 
 # テキストボックス
-txt2 = tkinter.Entry(width=50)
-txt2.place(x=350, y=10)
+txt2 = tkinter.Entry(width=42)
+txt2.place(x=400, y=10)
 txt2.insert(tkinter.END,"")
 
 
