@@ -1,4 +1,5 @@
 ############################################
+from tkinter.scrolledtext import ScrolledText
 import datetime
 import tkinter
 import sys
@@ -18,7 +19,7 @@ def getTextInput():
 
 
 
-textExample=tkinter.Text(root, height=40,width=110)
+textExample=ScrolledText(root, height=40,width=80, wrap=tkinter.CHAR)
 textExample.pack()
 textExample.place(x=90, y=40)
 
