@@ -48,6 +48,8 @@ def btn_click():
     get_data =txt2.get()
 
     match_word = get_data
+    if match_word=="":
+        return
 
     with closing(sqlite3.connect(dbname)) as conn:
         c = conn.cursor()
@@ -79,6 +81,48 @@ def btn_click():
     textExample.insert(tkinter.END,text2)
 
     return data_exist
+
+def btn_click10():
+    textExample.configure(font=("Courier", 10))
+
+    data_exist =0
+
+    get_data =txt2.get()
+
+    match_word = ""
+
+    with closing(sqlite3.connect(dbname)) as conn:
+        c = conn.cursor()
+        select_sql = 'select * from items where mean like '+'"%'+str(match_word)+'%"'
+
+        data=[]
+        print (select_sql )
+        try:
+
+            for row in c.execute(select_sql):
+                data_exist = 1;
+                print(row)
+                print(type(row))
+                text = "-".join(map(str, row))
+                print(text)
+                print(type(text))
+                data.append(text)
+                text2="".join(map(str, data))
+                data.append("----------------------------------------------------------------\n")
+            conn.commit()
+
+        except:
+
+            print("data exception")
+
+    
+    textExample.delete("1.0",tkinter.END)
+
+    textExample.insert(tkinter.END,text2)
+
+    return data_exist
+
+
 #指定キー表示
 def btn_click8():
     textExample.configure(font=("Courier", 10))
@@ -126,6 +170,7 @@ def btn_click2():
     txt.delete(0,tkinter.END)
     now = datetime.datetime.now()
     txt.insert(tkinter.END,now)
+    txt.insert(tkinter.END,"\n")
 
     get_data =txt.get()
     get_mean =textExample.get('1.0', 'end')
@@ -266,6 +311,9 @@ btn8.place(x=10, y=270)
 
 btn9 = tkinter.Button(root, text='キー指定更新', command=btn_click9)
 btn9.place(x=10, y=300)
+
+btn10 = tkinter.Button(root, text='全データ表示', command=btn_click10)
+btn10.place(x=10, y=330)
 
 # 画面サイズ
 root.geometry('1000x750')
