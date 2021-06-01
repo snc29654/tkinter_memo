@@ -324,7 +324,7 @@ btn8.place(x=10, y=270)
 btn9 = tkinter.Button(root, text='キー指定更新', command=btn_click9)
 btn9.place(x=10, y=300)
 
-btn10 = tkinter.Button(root, text='全データ表示', command=btn_click10)
+btn10 = tkinter.Button(root, text='全record表示', command=btn_click10)
 btn10.place(x=10, y=330)
 
 
@@ -367,6 +367,7 @@ test_combobox.bind(
     show_selected,              #呼び出す関数
 )
 
+test_combobox.current(0)
 test_combobox.pack()
 
 
