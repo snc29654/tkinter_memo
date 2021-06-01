@@ -6,6 +6,9 @@ import sys
 from tkinter import messagebox
 import sqlite3
 from contextlib import closing
+
+
+from tkinter import ttk
 dbname = '../memo.db'
 
 fontsize =10
@@ -104,6 +107,9 @@ def btn_click10():
                 print(row)
                 print(type(row))
                 text = "-".join(map(str, row))
+                if combovalue =='header':
+                    text=text[:80]
+
                 print(text)
                 print(type(text))
                 data.append(text)
@@ -121,47 +127,11 @@ def btn_click10():
     textExample.insert(tkinter.END,text2)
 
     return data_exist
-
-def btn_click11():
-    textExample.configure(font=("Courier", 10))
-
-    data_exist =0
-
-    get_data =txt2.get()
-
-    match_word = ""
-
-    with closing(sqlite3.connect(dbname)) as conn:
-        c = conn.cursor()
-        select_sql = 'select * from items where mean like '+'"%'+str(match_word)+'%"'
-
-        data=[]
-        print (select_sql )
-        try:
-
-            for row in c.execute(select_sql):
-                data_exist = 1;
-                print(row)
-                print(type(row))
-                text = "-".join(map(str, row))
-                print(text)
-                print(type(text))
-                text=text[:80]
-                data.append(text)
-                text2="".join(map(str, data))
-                data.append("----------------------------------------------------------------\n")
-            conn.commit()
-
-        except:
-
-            print("data exception")
-
-    
-    textExample.delete("1.0",tkinter.END)
-
-    textExample.insert(tkinter.END,text2)
-
-    return data_exist
+combovalue = "all"
+def show_selected(event):       #eventを引数に
+    global combovalue
+    combovalue=test_combobox.get()
+    print(combovalue)  #選択した値を表示
 
 
 
@@ -358,9 +328,6 @@ btn10 = tkinter.Button(root, text='全データ表示', command=btn_click10)
 btn10.place(x=10, y=330)
 
 
-btn11 = tkinter.Button(root, text='簡易表示', command=btn_click11)
-btn11.place(x=10, y=360)
-
 # 画面サイズ
 root.geometry('1000x750')
 # 画面タイトル
@@ -385,6 +352,22 @@ txt2 = tkinter.Entry(width=42)
 txt2.place(x=400, y=10)
 txt2.insert(tkinter.END,"")
 
+
+#root = tkinter.Tk()
+
+item_list = ['all', 'header']
+test_combobox = ttk.Combobox(
+    master=root,
+    values=item_list,
+    )
+
+#値選択時に発生するイベントと関数を紐づけ
+test_combobox.bind(
+    '<<ComboboxSelected>>',     #選択時に発生するイベント
+    show_selected,              #呼び出す関数
+)
+
+test_combobox.pack()
 
 
 
