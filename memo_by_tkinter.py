@@ -7,6 +7,8 @@ from tkinter import messagebox
 import sqlite3
 from contextlib import closing
 
+import requests
+from bs4 import BeautifulSoup
 
 from tkinter import ttk
 dbname = '../memo.db'
@@ -24,7 +26,7 @@ def getTextInput():
 
 textExample=ScrolledText(root, height=40,width=80, wrap=tkinter.CHAR)
 textExample.pack()
-textExample.place(x=90, y=40)
+textExample.place(x=90, y=70)
 
 
 btnRead=tkinter.Button(root, height=1, width=10, text="Clear", 
@@ -211,6 +213,49 @@ def btn_click2():
 
     #    textExample.insert(tkinter.END,"既に登録済")
 
+def  data_print():
+    import requests
+    get_url =txt_url.get()
+
+    site = requests.get(get_url)
+    data = BeautifulSoup(site.text, 'html.parser')
+    textExample.insert(tkinter.END,data.find_all("p"))
+
+def btn_click2_sc():
+    txt.delete(0,tkinter.END)
+    now = datetime.datetime.now()
+    txt.insert(tkinter.END,now)
+    txt.insert(tkinter.END,"\n")
+    data_print()
+    get_data =txt.get()
+    get_mean =textExample.get('1.0', 'end')
+
+
+    #if btn_click() == 0:
+
+    with closing(sqlite3.connect(dbname)) as conn:
+        c = conn.cursor()
+        create_table = '''create table items (item_id INTEGER PRIMARY KEY,word TEXT,mean TEXT)'''
+        try:
+            c.execute(create_table)
+        except:
+            print("database already exist")
+
+        insert_sql = 'insert into items (word, mean) values (?,?)'
+        items = [
+        (get_data, get_mean)
+        ]
+        c.executemany(insert_sql, items )
+        conn.commit()
+    #else:
+    #    print("既に登録済")
+
+    #    textExample.delete("1.0",tkinter.END)
+
+    #    textExample.insert(tkinter.END,"既に登録済")
+
+
+
 #テキストボックスクリア
 def btn_click3():
 
@@ -328,6 +373,10 @@ btn10 = tkinter.Button(root, text='全record表示', command=btn_click10)
 btn10.place(x=10, y=330)
 
 
+btn11 = tkinter.Button(root, text='scraping追加', command=btn_click2_sc)
+btn11.place(x=10, y=360)
+
+
 # 画面サイズ
 root.geometry('1000x750')
 # 画面タイトル
@@ -337,8 +386,12 @@ root.title('メモデータベース')
 lbl = tkinter.Label(text='キー')
 lbl.place(x=10, y=10)
 
+lbl3 = tkinter.Label(text='Scraping URL')
+lbl3.place(x=10, y=40)
+
+
 lbl2 = tkinter.Label(text='メモ')
-lbl2.place(x=10, y=50)
+lbl2.place(x=10, y=70)
 
 
 
@@ -351,6 +404,11 @@ txt.insert(tkinter.END,"")
 txt2 = tkinter.Entry(width=42)
 txt2.place(x=400, y=10)
 txt2.insert(tkinter.END,"")
+
+
+txt_url = tkinter.Entry(width=80)
+txt_url.place(x=120, y=40)
+txt_url.insert(tkinter.END,"")
 
 
 #root = tkinter.Tk()
