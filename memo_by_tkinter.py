@@ -109,7 +109,7 @@ def btn_click10():
                 print(row)
                 print(type(row))
                 text = "-".join(map(str, row))
-                if(px_v.get()==2):
+                if(header_only.get()==2):
                 #if combovalue =='header':
                     text=text[:80]
 
@@ -429,14 +429,14 @@ test_combobox.current(0)
 test_combobox.pack()
 """
 
-px_v = tkinter.IntVar(value=1)
+header_only = tkinter.IntVar(value=1)
 
 
 px_radio_1 = tkinter.Radiobutton(
     root,
     text="全て",
     value=1,
-    variable=px_v
+    variable=header_only
 )
 px_radio_1.place(x=700, y=30)
 
@@ -444,7 +444,7 @@ px_radio_2 = tkinter.Radiobutton(
     root,
     text="ヘッダーのみ",
     value=2,
-    variable=px_v
+    variable=header_only
 )
 px_radio_2.place(x=800, y=30)
 
