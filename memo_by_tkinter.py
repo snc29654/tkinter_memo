@@ -33,6 +33,25 @@ btnRead=tkinter.Button(root, height=1, width=10, text="Clear",
                     command=getTextInput)
 
 
+
+def execute():
+    func =function.get()
+    if(func==1):
+        btn_click2()
+    if(func==2):
+        btn_click10()
+    if(func==3):
+        btn_click8()
+    if(func==4):
+        btn_click9()
+    if(func==5):
+        btn_click4()
+    if(func==6):
+        btn_click2_sc()
+    if(func==7):
+        btn_click5()
+
+    
 def btn_click6():
     global fontsize
     fontsize = fontsize + 1
@@ -378,6 +397,8 @@ btn11 = tkinter.Button(root, text='scraping追加', command=btn_click2_sc)
 btn11.place(x=10, y=360)
 
 
+
+
 # 画面サイズ
 root.geometry('1000x700')
 # 画面タイトル
@@ -447,6 +468,65 @@ px_radio_2 = tkinter.Radiobutton(
     variable=header_only
 )
 px_radio_2.place(x=800, y=30)
+
+
+function = tkinter.IntVar(value=1)
+
+
+func_radio_1 = tkinter.Radiobutton(
+    root,
+    text="追加",
+    value=1,
+    variable=function
+)
+func_radio_1.place(x=700, y=60)
+
+func_radio_2 = tkinter.Radiobutton(
+    root,
+    text="全表示",
+    value=2,
+    variable=function
+)
+func_radio_2.place(x=700, y=80)
+
+func_radio_3 = tkinter.Radiobutton(
+    root,
+    text="キー指定表示",
+    value=3,
+    variable=function
+)
+func_radio_3.place(x=700, y=100)
+func_radio_4 = tkinter.Radiobutton(
+    root,
+    text="キー指定更新",
+    value=4,
+    variable=function
+)
+func_radio_4.place(x=700, y=120)
+func_radio_5 = tkinter.Radiobutton(
+    root,
+    text="キー指定削除",
+    value=5,
+    variable=function
+)
+func_radio_5.place(x=700, y=140)
+func_radio_6 = tkinter.Radiobutton(
+    root,
+    text="スクレーピング",
+    value=6,
+    variable=function
+)
+func_radio_6.place(x=700, y=160)
+func_radio_7 = tkinter.Radiobutton(
+    root,
+    text="全削除",
+    value=7,
+    variable=function
+)
+func_radio_7.place(x=700, y=180)
+
+btn12 = tkinter.Button(root, text='実行', command=execute)
+btn12.place(x=700, y=250)
 
 
 # 表示
