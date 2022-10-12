@@ -364,7 +364,7 @@ def btn_click5():
 # ボタン
 btn = tkinter.Button(root, text='キーワード検索', command=btn_click)
 btn.place(x=300, y=10)
-
+"""
 btn2 = tkinter.Button(root, text='追加', command=btn_click2)
 btn2.place(x=10, y=110)
 
@@ -376,13 +376,13 @@ btn4.place(x=10, y=150)
 
 btn5 = tkinter.Button(root, text='全削除', command=btn_click5)
 btn5.place(x=10, y=180)
-
+"""
 btn6 = tkinter.Button(root, text='フォント大', command=btn_click6)
 btn6.place(x=10, y=210)
 
 btn7 = tkinter.Button(root, text='フォント小', command=btn_click7)
 btn7.place(x=10, y=240)
-
+"""
 btn8 = tkinter.Button(root, text='キー指定表示', command=btn_click8)
 btn8.place(x=10, y=270)
 
@@ -396,7 +396,7 @@ btn10.place(x=10, y=330)
 btn11 = tkinter.Button(root, text='scraping追加', command=btn_click2_sc)
 btn11.place(x=10, y=360)
 
-
+"""
 
 
 # 画面サイズ
